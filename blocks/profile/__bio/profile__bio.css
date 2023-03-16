@@ -6,7 +6,7 @@
 }
 
 @media screen and (max-width: 1023px) {
-  .profile__text {
+  .profile__bio {
     align-items: center;
     gap: 7px;
   }
