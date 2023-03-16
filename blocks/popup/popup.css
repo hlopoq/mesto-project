@@ -1,0 +1,9 @@
+.popup {
+  align-items: center;
+  background: rgba(0,0,0,.5);
+  display: none;
+  height: 100vh;
+  width: 100%;
+  justify-content: center;
+  position: fixed;
+}

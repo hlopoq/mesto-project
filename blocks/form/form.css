@@ -1,0 +1,12 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 48px;
+}
+
+@media screen and (max-width: 1023px) {
+  .form {
+    row-gap: 45px;
+  }
+}
