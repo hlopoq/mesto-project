@@ -4,10 +4,11 @@
   border-radius: 2px;
   box-sizing: border-box;
   color: #fff;
-  font-family: Inter, Arial, sans-serif;
+  font-family: 'Inter', Arial, sans-serif;
   cursor: pointer;
   font-size: 18px;
   font-weight: 400;
+  font-style: normal;
   line-height: 21.78px;
   padding: 14px 0;
   text-align: center;

@@ -1,7 +1,4 @@
 .form__input {
-  display: flex;
-  flex-direction: column;
-  row-gap: 30px;
   box-sizing: border-box;
   padding: 0;
   border: none;
