@@ -1,6 +1,6 @@
 .form__button {
   background: #000;
-  border: 1px solid #000;
+  border: none;
   border-radius: 2px;
   box-sizing: border-box;
   color: #fff;
@@ -12,7 +12,8 @@
   padding: 14px 0;
   text-align: center;
   transition: opacity 0.3s linear;
-  width: 100%
+  width: 358px;
+  height: 50px;
 }
 
 .form__button:hover {
@@ -24,5 +25,7 @@
     font-size: 14px;
     line-height: 16.94px;
     padding: 14px 82px;
+    width: 238px;
+    height: 46px;
 }
 }
