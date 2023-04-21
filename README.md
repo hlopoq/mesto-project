@@ -11,6 +11,7 @@
 * Grid Layout
 * Media queries
 * Figma
+* JavaScript
 
 ## [Реализация](https://hlopoq.github.io/mesto-project/)
 

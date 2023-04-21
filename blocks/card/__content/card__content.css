@@ -1,7 +1,7 @@
 .card__content {
-  align-items: center;
   display: flex;
   justify-content: space-between;
-  padding: 25px 15px 31px 21px;
+  align-items: center;
+  padding: 25px 20px 31px 21px;
   gap: 32px;
 }
