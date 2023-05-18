@@ -1,6 +1,6 @@
 import { openPopup } from "./modal.js";
 import { initialCards } from "./constants.js";
-import { cardsContainer } from "../index.js";
+import { cardsContainer } from "./index.js";
 
 const fullScreen = document.querySelector(".popup__fullscreen");
 const fullScreenImage = fullScreen.querySelector(".popup__fullscreen-image");

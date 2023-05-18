@@ -1,3 +1,5 @@
+import { resetButtonState } from "./validate.js";
+
 const popupCloseButton = document.querySelectorAll(".popup__close-button");
 popupCloseButton.forEach((button) => {
   const popupNearest = button.closest(".popup");
@@ -73,7 +75,6 @@ const addButton = document.querySelector(".profile__add-button");
 
 addButton.addEventListener("click", () => {
   popupFormSubmit.reset();
-  buttonElement.classList.add("form__button_inactive");
-  buttonElement.disabled = true;
+  resetButtonState(buttonElement, "form__button_inactive");
   openPopup(popupTypeCard);
 });
