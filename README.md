@@ -1,17 +1,20 @@
 # Проект: Место
 
 ## Обзор
+
 Учебный проект в рамках курса **"Веб-разработчик+"** образовательной платформы **Яндекс.Практикум**.
 
 Сервис Mesto — интерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки.
 
 ## Используемые методы и технологии
-* БЭМ
-* Flexbox
-* Grid Layout
-* Media queries
-* Figma
-* JavaScript
+
+- БЭМ
+- Flexbox
+- Grid Layout
+- Media queries
+- Figma
+- JavaScript
+- Webpack
 
 ## [Реализация](https://hlopoq.github.io/mesto-project/)
 
