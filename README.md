@@ -15,6 +15,8 @@
 - Figma
 - JavaScript
 - Webpack
+- API
+- Deploy
 
 ## [Реализация](https://hlopoq.github.io/mesto-project/)
 

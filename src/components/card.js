@@ -34,7 +34,7 @@ function createCardItem(nameValue, linkValue) {
 
 function setCardLikes(cardItem, cardLikes) {
   const cardLikeCounter = cardItem.querySelector(".card__like-counter");
-  cardLikeCounter.textContent = cardLikes.likes.length;
+  cardLikeCounter.textContent = cardLikes.length;
   const myLike = cardLikes.some((item) => item._id === ownerId);
   if (myLike) {
     cardItem
