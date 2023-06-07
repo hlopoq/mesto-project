@@ -1,6 +1,10 @@
-import { openPopup } from "./modal.js";
-import { initialCards } from "./constants.js";
-import { cardsContainer } from "./index.js";
+import { openPopup, closePopup, deletePopup, confirmDelete } from "./modal.js";
+import { ownerId } from "./index.js";
+import {
+  deleteCardFromServer,
+  likeCardToServer,
+  deleteLikeCardFromServer,
+} from "./api.js";
 
 const fullScreen = document.querySelector(".popup__fullscreen");
 const fullScreenImage = fullScreen.querySelector(".popup__fullscreen-image");
@@ -8,43 +12,92 @@ const fullScreenHeading = fullScreen.querySelector(
   ".popup__fullscreen-heading"
 );
 
-export function createCard(nameValue, linkValue) {
+export function createCard(nameValue, linkValue, cardId, cardLikes, cardOwner) {
+  if (!linkValue) {
+    return "";
+  }
+  const cardItem = createCardItem(nameValue, linkValue);
+  setCardLikes(cardItem, cardLikes);
+  addCardEventListeners(cardItem, cardId, cardLikes, cardOwner);
+  return cardItem;
+}
+
+function createCardItem(nameValue, linkValue) {
   const cardTemplate = document.querySelector("#card").content;
-  if (linkValue) {
-    const cardItem = cardTemplate.querySelector(".card").cloneNode(true);
-    cardItem.querySelector(".card__image").src = linkValue;
-    cardItem.querySelector(".card__image").alt = nameValue;
-    cardItem.querySelector(".card__heading").textContent = nameValue;
+  const cardItem = cardTemplate.querySelector(".card").cloneNode(true);
+  const cardImage = cardItem.querySelector(".card__image");
+  cardImage.src = linkValue;
+  cardImage.alt = `img = ${nameValue}`;
+  cardItem.querySelector(".card__heading").textContent = nameValue;
+  return cardItem;
+}
+
+function setCardLikes(cardItem, cardLikes) {
+  const cardLikeCounter = cardItem.querySelector(".card__like-counter");
+  cardLikeCounter.textContent = cardLikes.likes.length;
+  const myLike = cardLikes.some((item) => item._id === ownerId);
+  if (myLike) {
     cardItem
       .querySelector(".card__like-button")
-      .addEventListener("click", function (e) {
-        e.target.classList.toggle("card__like-button_active");
-      });
-    cardItem
-      .querySelector(".card__trash")
-      .addEventListener("click", function (e) {
-        e.target.closest(".card").remove();
-      });
-    cardItem
-      .querySelector(".card__image")
-      .addEventListener("click", function (e) {
-        fullScreenImage.src = e.target.closest(".card__image").src;
-        fullScreenImage.alt = e.target.closest(".card__image").alt;
-        fullScreenHeading.textContent =
-          e.target.closest(".card__image").nextElementSibling.textContent;
-        openPopup(fullScreen);
-      });
-    return cardItem;
-  } else {
-    return "";
+      .classList.add("card__like-button_active");
   }
 }
 
-export function addInitialCards() {
-  for (let i = 0; i < initialCards.length; i++) {
-    const nameValue = initialCards[i].name;
-    const linkValue = initialCards[i].link;
-    const newCard = createCard(nameValue, linkValue);
-    cardsContainer.prepend(newCard);
+function addCardEventListeners(cardItem, cardId, cardLikes, cardOwner) {
+  const cardLikeButton = cardItem.querySelector(".card__like-button");
+  cardLikeButton.addEventListener("click", () => {
+    if (!cardLikeButton.classList.contains("card__like-button_active")) {
+      likeCardToServer(cardId)
+        .then((res) => {
+          cardItem.querySelector(".card__like-counter").textContent =
+            res.likes.length;
+          cardLikeButton.classList.add("card__like-button_active");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      deleteLikeCardFromServer(cardId)
+        .then((res) => {
+          cardItem.querySelector(".card__like-counter").textContent =
+            res.likes.length;
+          cardLikeButton.classList.remove("card__like-button_active");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  });
+
+  const cardDeleteButton = cardItem.querySelector(".card__trash");
+  if (cardOwner._id === ownerId) {
+    cardDeleteButton.addEventListener("click", () => {
+      openPopup(deletePopup);
+      confirmDelete()
+        .then(() => {
+          deleteCardFromServer(cardId)
+            .then((res) => {
+              console.log(res);
+              closePopup(deletePopup);
+              cardItem.remove();
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
+  } else {
+    cardDeleteButton.classList.add("card__trash_hidden");
   }
+  const cardImageButton = cardItem.querySelector(".card__image");
+  cardImageButton.addEventListener("click", () => {
+    fullScreenImage.src = cardImageButton.src;
+    fullScreenImage.alt = cardImageButton.alt;
+    fullScreenHeading.textContent =
+      cardImageButton.nextElementSibling.textContent;
+    openPopup(fullScreen);
+  });
 }

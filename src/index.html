@@ -12,7 +12,11 @@
     <main class="content">
       <section class="profile">
         <div class="profile__info">
-          <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Аватар профиля">
+          <div class="profile__avatar-container">
+            <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Аватар профиля">
+            <img class="profile__avatar-edit" src="<%=require('./images/edit_avatar.svg')%>" alt="Изменение аватара">
+            <button type="button" class="profile__avatar-button" aria-label="Изменить аватар"></button>
+          </div>
           <div class="profile__bio">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
             <p class="profile__caption">Исследователь океана</p>
@@ -77,13 +81,13 @@
           required>
           <span class="form__input-error card-heading-error">Вы пропустили это поле.</span>
           <input
-          class="form__input form__input_card-link"
+          class="form__input form__input_link"
           type="url"
           placeholder="Ссылка на картинку"
-          name="card-link"
-          id="card-link"
+          name="link"
+          id="link"
           required>
-          <span class="form__input-error card-link-error">Введите адрес сайта.</span>
+          <span class="form__input-error link-error">Введите адрес сайта.</span>
           <button class="form__button" type="submit">Создать</button>
         </form>
         <button class="popup__close-button" type="button" aria-label="Закрыть форму"></button>
@@ -96,12 +100,41 @@
         <button class="popup__close-button" type="button" aria-label="Закрыть карточку"></button>
       </div>
     </div>
+    <div class="popup popup_edit-avatar">
+      <div class="popup__container">
+        <h2 class="popup__heading">Обновить аватар</h2>
+        <form class="form popup_form-avatar" name="edit-avatar">
+          <input
+          class="form__input form__input_link"
+          type="url"
+          placeholder="Ссылка на картинку аватара"
+          name="link"
+          id="link"
+          required>
+          <span class="form__input-error link-error">Введите адрес сайта.</span>
+          <button class="form__button" type="submit" aria-label="Сохранить изменения">Сохранить</button>
+        </form>
+        <button class="popup__close-button" type="button" aria-label="Закрыть форму"></button>
+      </div>
+    </div>
+    <div class="popup popup_delete-card">
+      <div class="popup__container">
+        <h2 class="popup__heading">Вы уверены?</h2>
+        <form class="form">
+          <button class="form__button" type="submit">Да</button>
+        </form>
+        <button class="popup__close-button" type="button" aria-label="Закрыть форму"></button>
+      </div>
+    </div>
     <template id="card">
       <div class="card">
         <img class="card__image" src="" alt="">
         <div class="card__content">
           <h2 class="card__heading"></h2>
-          <button class="card__like-button" type="button" aria-label="Лайк"></button>
+          <div class="card__likes-wrapper">
+            <button class="card__like-button" type="button" aria-label="Лайк"></button>
+            <span class="card__like-counter"></span>
+          </div>
         </div>
         <button class="card__trash" type="button" aria-lebel="Корзина"></button>
       </div>

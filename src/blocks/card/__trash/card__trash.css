@@ -20,3 +20,6 @@
   opacity: 0.6;
 }
 
+.card__trash_hidden {
+  visibility: hidden;
+}

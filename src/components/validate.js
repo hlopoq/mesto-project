@@ -18,6 +18,22 @@ const hideError = (formElement, inputElement, inputErrorClass, errorClass) => {
   errorElement.textContent = "";
 };
 
+export function clearFormErrors(formElement, inputErrorClass, errorClass) {
+  const inputList = Array.from(formElement.querySelectorAll(".form__input"));
+  const errorList = Array.from(
+    formElement.querySelectorAll(".form__input-error")
+  );
+
+  inputList.forEach((inputElement) => {
+    inputElement.classList.remove(inputErrorClass);
+  });
+
+  errorList.forEach((errorElement) => {
+    errorElement.textContent = "";
+    errorElement.classList.remove(errorClass);
+  });
+}
+
 const checkInputValidity = (
   formElement,
   inputElement,
