@@ -12,20 +12,13 @@ popupCloseButton.forEach((button) => {
 
 export function openPopup(popup) {
   popup.classList.add("popup_opened");
-  const formElement = popup.querySelector(".form");
-  if (formElement) {
-    clearFormErrors(
-      formElement,
-      "form__input_type-error",
-      "form__input-error_active"
-    );
-    formElement.reset();
-  }
-
   document.addEventListener("keydown", closePopupEscape);
   popup.addEventListener("click", closePopupOverlay);
+  if (popup === popupEditList) {
+    formName.value = profileNameList.textContent;
+    formAbout.value = profileCaptionList.textContent;
+  }
 }
-
 export function closePopup(popup) {
   popup.classList.remove("popup_opened");
   document.removeEventListener("keydown", closePopupEscape);
@@ -58,6 +51,12 @@ const profileEditButtonList = document.querySelector(".profile__edit-button");
 profileEditButtonList.addEventListener("click", () => {
   formName.value = profileNameList.textContent;
   formAbout.value = profileCaptionList.textContent;
+  clearFormErrors(
+    formEditProfile,
+    "form__input_type-error",
+    "form__input-error_active"
+  );
+  formEditProfile.reset();
   openPopup(popupEditList);
 });
 
@@ -107,18 +106,21 @@ function handleSubmitformEditProfile(evt) {
 formEditProfile.addEventListener("submit", handleSubmitformEditProfile);
 
 export const popupTypeCard = document.querySelector(".popup_type-card");
-export const popupFormSubmit =
-  popupTypeCard.querySelector(".popup_form-submit");
-export const inputCardName = popupFormSubmit.querySelector(
-  ".form__input_card-name"
-);
-export const inputCardLink = popupFormSubmit.querySelector(".form__input_link");
-const buttonElement = popupFormSubmit.querySelector(".form__button");
+export const cardForm = popupTypeCard.querySelector(".popup_form-submit");
+export const inputCardName = cardForm.querySelector(".form__input_card-name");
+export const inputCardLink = cardForm.querySelector(".form__input_link");
+const cardbuttonElement = cardForm.querySelector(".form__button");
 
 const addButton = document.querySelector(".profile__add-button");
 addButton.addEventListener("click", () => {
-  popupFormSubmit.reset();
-  resetButtonState(buttonElement, "form__button_inactive");
+  cardForm.reset();
+  resetButtonState(cardbuttonElement, "form__button_inactive");
+  clearFormErrors(
+    cardForm,
+    "form__input_type-error",
+    "form__input-error_active"
+  );
+  cardForm.reset();
   openPopup(popupTypeCard);
 });
 
@@ -141,7 +143,7 @@ function handleSubmitformAddCard(evt) {
   handleFormSubmit(sendRequest, evt);
 }
 
-popupFormSubmit.addEventListener("submit", handleSubmitformAddCard);
+cardForm.addEventListener("submit", handleSubmitformAddCard);
 
 export const avatarPopupWindow = document.querySelector(".popup_edit-avatar");
 export const avatarFormElement =
@@ -153,8 +155,13 @@ const changeAvatarButton = avatarFormElement.querySelector(".form__button");
 const openAvatarPopupButton = document.querySelector(".profile__avatar-button");
 openAvatarPopupButton.addEventListener("click", () => {
   avatarFormElement.reset();
-  changeAvatarButton.classList.add("form__button_inactive");
-  changeAvatarButton.disabled = true;
+  resetButtonState(changeAvatarButton, "form__button_inactive");
+  clearFormErrors(
+    avatarFormElement,
+    "form__input_type-error",
+    "form__input-error_active"
+  );
+  avatarFormElement.reset();
   openPopup(avatarPopupWindow);
 });
 
