@@ -20,13 +20,13 @@ Promise.all([getUserInformation(), getInitialCards()])
     profileAvatarList.src = updatedData.avatar;
     ownerId = updatedData._id;
     cards.reverse();
-    cards.forEach((cardObj) => {
+    cards.forEach((cardData) => {
       const newCard = createCard(
-        cardObj.name,
-        cardObj.link,
-        cardObj._id,
-        cardObj.likes,
-        cardObj.owner
+        cardData.name,
+        cardData.link,
+        cardData._id,
+        cardData.likes,
+        cardData.owner
       );
       cardsContainer.prepend(newCard);
     });

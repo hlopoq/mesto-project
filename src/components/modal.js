@@ -127,11 +127,11 @@ function handleSubmitformAddCard(evt) {
     return postNewCard(inputCardName.value, inputCardLink.value).then(
       (cardData) => {
         const newCard = createCard(
-          cardData.likes,
-          cardData._id,
-          cardData.owner,
+          cardData.name,
           cardData.link,
-          cardData.name
+          cardData._id,
+          cardData.likes,
+          cardData.owner
         );
         cardsContainer.prepend(newCard);
         closePopup(popupTypeCard);
@@ -165,17 +165,7 @@ function handleAvatarChangeSubmit(evt) {
       closePopup(avatarPopupWindow);
     });
   }
-  handleSubmit(sendRequest, evt);
+  handleFormSubmit(sendRequest, evt);
 }
 
 avatarFormElement.addEventListener("submit", handleAvatarChangeSubmit);
-
-export const deletePopup = document.querySelector(".popup_delete-card");
-const deleteButton = deletePopup.querySelector(".form__button");
-export function confirmDelete() {
-  return new Promise((resolve) => {
-    deleteButton.onclick = function () {
-      resolve();
-    };
-  });
-}

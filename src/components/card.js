@@ -1,4 +1,4 @@
-import { openPopup, closePopup, deletePopup, confirmDelete } from "./modal.js";
+import { openPopup } from "./modal.js";
 import { ownerId } from "./index.js";
 import {
   deleteCardFromServer,
@@ -72,18 +72,10 @@ function addCardEventListeners(cardItem, cardId, cardLikes, cardOwner) {
   const cardDeleteButton = cardItem.querySelector(".card__trash");
   if (cardOwner._id === ownerId) {
     cardDeleteButton.addEventListener("click", () => {
-      openPopup(deletePopup);
-      confirmDelete()
-        .then(() => {
-          deleteCardFromServer(cardId)
-            .then((res) => {
-              console.log(res);
-              closePopup(deletePopup);
-              cardItem.remove();
-            })
-            .catch((err) => {
-              console.log(err);
-            });
+      deleteCardFromServer(cardId)
+        .then((res) => {
+          console.log(res);
+          cardItem.remove();
         })
         .catch((err) => {
           console.log(err);
@@ -97,7 +89,7 @@ function addCardEventListeners(cardItem, cardId, cardLikes, cardOwner) {
     fullScreenImage.src = cardImageButton.src;
     fullScreenImage.alt = cardImageButton.alt;
     fullScreenHeading.textContent =
-      cardImageButton.nextElementSibling.textContent;
+      cardItem.querySelector(".card__heading").textContent;
     openPopup(fullScreen);
   });
 }
