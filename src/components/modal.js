@@ -14,10 +14,6 @@ export function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", closePopupEscape);
   popup.addEventListener("click", closePopupOverlay);
-  if (popup === popupEditList) {
-    formName.value = profileNameList.textContent;
-    formAbout.value = profileCaptionList.textContent;
-  }
 }
 export function closePopup(popup) {
   popup.classList.remove("popup_opened");
@@ -49,14 +45,17 @@ const formAbout = formEditProfile.querySelector(".form__input_type_about");
 const profileEditButtonList = document.querySelector(".profile__edit-button");
 
 profileEditButtonList.addEventListener("click", () => {
-  formName.value = profileNameList.textContent;
-  formAbout.value = profileCaptionList.textContent;
   clearFormErrors(
     formEditProfile,
     "form__input_type-error",
     "form__input-error_active"
   );
   formEditProfile.reset();
+  setTimeout(() => {
+    formName.value = profileNameList.textContent;
+    formAbout.value = profileCaptionList.textContent;
+  }, 0);
+
   openPopup(popupEditList);
 });
 
