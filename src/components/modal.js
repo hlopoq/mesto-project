@@ -55,7 +55,6 @@ profileEditButtonList.addEventListener("click", () => {
     formName.value = profileNameList.textContent;
     formAbout.value = profileCaptionList.textContent;
   }, 0);
-
   openPopup(popupEditList);
 });
 
