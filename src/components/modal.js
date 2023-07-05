@@ -1,6 +1,6 @@
 import { resetButtonState, clearFormErrors } from "./validate.js";
-import { changeUserInformation, postNewCard, changeUserAvatar } from "./api.js";
-import { createCard } from "./card.js";
+import { changeUserInformation, postNewCard, changeUserAvatar } from "./Api.js";
+import { createCard } from "./Card.js";
 
 export const cardsContainer = document.querySelector(".cards");
 

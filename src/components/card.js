@@ -1,10 +1,10 @@
 import { openPopup } from "./modal.js";
-import { ownerId } from "./index.js";
+import { ownerId } from "../pages/index.js";
 import {
   deleteCardFromServer,
   likeCardToServer,
   deleteLikeCardFromServer,
-} from "./api.js";
+} from "./Api.js";
 
 const fullScreen = document.querySelector(".popup__fullscreen");
 const fullScreenImage = fullScreen.querySelector(".popup__fullscreen-image");

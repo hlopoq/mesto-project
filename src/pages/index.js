@@ -1,13 +1,13 @@
-import "../styles/index.css";
-import { enableValidation } from "./validate.js";
-import { createCard } from "./card.js";
-import { getUserInformation, getInitialCards } from "./api.js";
+import "./index.css";
+import { enableValidation } from "../components/validate.js";
+import { createCard } from "../components/Card.js";
+import { getUserInformation, getInitialCards } from "../components/Api.js";
 import {
   cardsContainer,
   profileNameList,
   profileCaptionList,
   profileAvatarList,
-} from "./modal.js";
+} from "../components/modal.js";
 
 export let ownerId = "";
 
