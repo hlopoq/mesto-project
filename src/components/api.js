@@ -12,23 +12,23 @@ class Api {
   }
 
   _request(url, options) {
-    return fetch(url, options).then(_getResponseData);
+    return fetch(url, options).then((res) => this._getResponseData(res));
   }
 
   getUserInformation() {
-    return _request(`${this.baseUrl}/users/me`, {
+    return this._request(`${this.baseUrl}/users/me`, {
       headers: this.headers,
     });
   }
 
   getInitialCards() {
-    return _request(`${this.baseUrl}/cards`, {
+    return this._request(`${this.baseUrl}/cards`, {
       headers: this.headers,
     });
   }
 
   changeUserInformation(name, about) {
-    return _request(`${this.baseUrl}/users/me`, {
+    return this._request(`${this.baseUrl}/users/me`, {
       method: "PATCH",
       body: JSON.stringify({
         name: `${name}`,
@@ -39,7 +39,7 @@ class Api {
   }
 
   postNewCard(name, link) {
-    return _request(`${this.baseUrl}/cards`, {
+    return this._request(`${this.baseUrl}/cards`, {
       method: "POST",
       body: JSON.stringify({
         name: `${name}`,
@@ -50,28 +50,28 @@ class Api {
   }
 
   deleteCardFromServer(cardId) {
-    return _request(`${this.baseUrl}/cards/${cardId}`, {
+    return this._request(`${this.baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this.headers,
     });
   }
 
   likeCardToServer(cardId) {
-    return _request(`${this.baseUrl}/cards/likes/${cardId}`, {
+    return this._request(`${this.baseUrl}/cards/likes/${cardId}`, {
       method: "PUT",
       headers: this.headers,
     });
   }
 
   deleteLikeCardFromServer(cardId) {
-    return _request(`${this.baseUrl}/cards/likes/${cardId}`, {
+    return this._request(`${this.baseUrl}/cards/likes/${cardId}`, {
       method: "DELETE",
       headers: this.headers,
     });
   }
 
   changeUserAvatar(link) {
-    return _request(`${this.baseUrl}/users/me/avatar`, {
+    return this._request(`${this.baseUrl}/users/me/avatar`, {
       method: "PATCH",
       body: JSON.stringify({
         avatar: `${link}`,
@@ -90,4 +90,3 @@ const api = new Api({
 });
 
 export { api };
-

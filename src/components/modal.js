@@ -1,6 +1,6 @@
 import { resetButtonState, clearFormErrors } from "./validate.js";
 import { createCard } from "./Card.js";
-import { api } from "../components/api.js";
+import { api } from "./Api.js";
 
 export const cardsContainer = document.querySelector(".cards");
 
@@ -90,14 +90,14 @@ export function handleFormSubmit(request, evt, loadingText = "Сохранени
 
 function handleSubmitformEditProfile(evt) {
   function sendRequest() {
-    return api.changeUserInformation(formName.value, formAbout.value).then(
-      (updatedData) => {
+    return api
+      .changeUserInformation(formName.value, formAbout.value)
+      .then((updatedData) => {
         profileNameList.textContent = updatedData.name;
         profileCaptionList.textContent = updatedData.about;
         profileAvatarList.src = updatedData.avatar;
         closePopup(popupEditList);
-      }
-    );
+      });
   }
   handleFormSubmit(sendRequest, evt);
 }
@@ -124,8 +124,9 @@ addButton.addEventListener("click", () => {
 
 function handleSubmitformAddCard(evt) {
   function sendRequest() {
-    return api.postNewCard(inputCardName.value, inputCardLink.value).then(
-      (cardData) => {
+    return api
+      .postNewCard(inputCardName.value, inputCardLink.value)
+      .then((cardData) => {
         const newCard = createCard(
           cardData.name,
           cardData.link,
@@ -135,8 +136,7 @@ function handleSubmitformAddCard(evt) {
         );
         cardsContainer.prepend(newCard);
         closePopup(popupTypeCard);
-      }
-    );
+      });
   }
   handleFormSubmit(sendRequest, evt);
 }
@@ -165,10 +165,12 @@ openAvatarPopupButton.addEventListener("click", () => {
 
 function handleAvatarChangeSubmit(evt) {
   function sendRequest() {
-    return api.changeUserAvatar(avatarLinkInputField.value).then((avatarData) => {
-      profileAvatarList.src = avatarData.avatar;
-      closePopup(avatarPopupWindow);
-    });
+    return api
+      .changeUserAvatar(avatarLinkInputField.value)
+      .then((avatarData) => {
+        profileAvatarList.src = avatarData.avatar;
+        closePopup(avatarPopupWindow);
+      });
   }
   handleFormSubmit(sendRequest, evt);
 }

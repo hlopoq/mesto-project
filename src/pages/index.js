@@ -1,7 +1,7 @@
 import "./index.css";
 import { enableValidation } from "../components/validate.js";
 import { createCard } from "../components/Card.js";
-import { getUserInformation, getInitialCards } from "../components/Api.js";
+import { api } from "../components/Api.js";
 import {
   cardsContainer,
   profileNameList,
@@ -11,7 +11,7 @@ import {
 
 export let ownerId = "";
 
-Promise.all([getUserInformation(), getInitialCards()])
+Promise.all([api.getUserInformation(), api.getInitialCards()])
   .then(([updatedData, cards]) => {
     console.log(updatedData);
     console.log(cards);

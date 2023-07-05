@@ -1,6 +1,6 @@
 import { openPopup } from "./modal.js";
 import { ownerId } from "../pages/index.js";
-import { api } from "../components/api.js";
+import { api } from "./Api.js";
 
 const fullScreen = document.querySelector(".popup__fullscreen");
 const fullScreenImage = fullScreen.querySelector(".popup__fullscreen-image");
@@ -43,7 +43,8 @@ function addCardEventListeners(cardItem, cardId, cardLikes, cardOwner) {
   const cardLikeButton = cardItem.querySelector(".card__like-button");
   cardLikeButton.addEventListener("click", () => {
     if (!cardLikeButton.classList.contains("card__like-button_active")) {
-      api.likeCardToServer(cardId)
+      api
+        .likeCardToServer(cardId)
         .then((res) => {
           cardItem.querySelector(".card__like-counter").textContent =
             res.likes.length;
@@ -53,7 +54,8 @@ function addCardEventListeners(cardItem, cardId, cardLikes, cardOwner) {
           console.log(err);
         });
     } else {
-      api.deleteLikeCardFromServer(cardId)
+      api
+        .deleteLikeCardFromServer(cardId)
         .then((res) => {
           cardItem.querySelector(".card__like-counter").textContent =
             res.likes.length;
@@ -68,7 +70,8 @@ function addCardEventListeners(cardItem, cardId, cardLikes, cardOwner) {
   const cardDeleteButton = cardItem.querySelector(".card__trash");
   if (cardOwner._id === ownerId) {
     cardDeleteButton.addEventListener("click", () => {
-      api.deleteCardFromServer(cardId)
+      api
+        .deleteCardFromServer(cardId)
         .then((res) => {
           console.log(res);
           cardItem.remove();
