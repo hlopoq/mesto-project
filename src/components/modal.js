@@ -1,6 +1,6 @@
 import { resetButtonState, clearFormErrors } from "./validate.js";
-import { changeUserInformation, postNewCard, changeUserAvatar } from "./Api.js";
 import { createCard } from "./Card.js";
+import { api } from "../components/api.js";
 
 export const cardsContainer = document.querySelector(".cards");
 
@@ -90,7 +90,7 @@ export function handleFormSubmit(request, evt, loadingText = "Сохранени
 
 function handleSubmitformEditProfile(evt) {
   function sendRequest() {
-    return changeUserInformation(formName.value, formAbout.value).then(
+    return api.changeUserInformation(formName.value, formAbout.value).then(
       (updatedData) => {
         profileNameList.textContent = updatedData.name;
         profileCaptionList.textContent = updatedData.about;
@@ -124,7 +124,7 @@ addButton.addEventListener("click", () => {
 
 function handleSubmitformAddCard(evt) {
   function sendRequest() {
-    return postNewCard(inputCardName.value, inputCardLink.value).then(
+    return api.postNewCard(inputCardName.value, inputCardLink.value).then(
       (cardData) => {
         const newCard = createCard(
           cardData.name,
@@ -165,7 +165,7 @@ openAvatarPopupButton.addEventListener("click", () => {
 
 function handleAvatarChangeSubmit(evt) {
   function sendRequest() {
-    return changeUserAvatar(avatarLinkInputField.value).then((avatarData) => {
+    return api.changeUserAvatar(avatarLinkInputField.value).then((avatarData) => {
       profileAvatarList.src = avatarData.avatar;
       closePopup(avatarPopupWindow);
     });
