@@ -1,5 +1,4 @@
 import "./index.css";
-import { enableValidation } from "../components/validate.js";
 import { createCard } from "../components/Card.js";
 import { api } from "../components/Api.js";
 import {
@@ -34,12 +33,3 @@ Promise.all([api.getUserInformation(), api.getInitialCards()])
   .catch((err) => {
     console.log(err);
   });
-
-enableValidation({
-  formSelector: ".form",
-  inputSelector: ".form__input",
-  submitButtonSelector: ".form__button",
-  inactiveButtonClass: "form__button_inactive",
-  inputErrorClass: "form__input_type-error",
-  errorClass: "form__input-error_active",
-});

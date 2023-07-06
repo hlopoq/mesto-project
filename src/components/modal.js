@@ -1,6 +1,6 @@
-import { resetButtonState, clearFormErrors } from "./validate.js";
 import { createCard } from "./Card.js";
 import { api } from "./Api.js";
+import { FormValidator } from "./FormValidator.js";
 
 export const cardsContainer = document.querySelector(".cards");
 
@@ -14,7 +14,20 @@ export function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", closePopupEscape);
   popup.addEventListener("click", closePopupOverlay);
+
+  const popupValidator = new FormValidator(
+    {
+      inputSelector: ".form__input",
+      submitButtonSelector: ".form__button",
+      inactiveButtonClass: "form__button_inactive",
+      inputErrorClass: "form__input_type-error",
+      errorClass: "form__input-error_active",
+    },
+    popup.querySelector(".form")
+  );
+  popupValidator.enableValidation();
 }
+
 export function closePopup(popup) {
   popup.classList.remove("popup_opened");
   document.removeEventListener("keydown", closePopupEscape);
@@ -45,16 +58,8 @@ const formAbout = formEditProfile.querySelector(".form__input_type_about");
 const profileEditButtonList = document.querySelector(".profile__edit-button");
 
 profileEditButtonList.addEventListener("click", () => {
-  clearFormErrors(
-    formEditProfile,
-    "form__input_type-error",
-    "form__input-error_active"
-  );
-  formEditProfile.reset();
-  setTimeout(() => {
-    formName.value = profileNameList.textContent;
-    formAbout.value = profileCaptionList.textContent;
-  }, 0);
+  formName.value = profileNameList.textContent;
+  formAbout.value = profileCaptionList.textContent;
   openPopup(popupEditList);
 });
 
@@ -112,13 +117,8 @@ const cardbuttonElement = cardForm.querySelector(".form__button");
 const addButton = document.querySelector(".profile__add-button");
 addButton.addEventListener("click", () => {
   cardForm.reset();
-  resetButtonState(cardbuttonElement, "form__button_inactive");
-  clearFormErrors(
-    cardForm,
-    "form__input_type-error",
-    "form__input-error_active"
-  );
-  cardForm.reset();
+  addButton.classList.add("form__button_inactive");
+  addButton.disabled = true;
   openPopup(popupTypeCard);
 });
 
@@ -153,13 +153,8 @@ const changeAvatarButton = avatarFormElement.querySelector(".form__button");
 const openAvatarPopupButton = document.querySelector(".profile__avatar-button");
 openAvatarPopupButton.addEventListener("click", () => {
   avatarFormElement.reset();
-  resetButtonState(changeAvatarButton, "form__button_inactive");
-  clearFormErrors(
-    avatarFormElement,
-    "form__input_type-error",
-    "form__input-error_active"
-  );
-  avatarFormElement.reset();
+  changeAvatarButton.classList.add("form__button_inactive");
+  changeAvatarButton.disabled = true;
   openPopup(avatarPopupWindow);
 });
 
