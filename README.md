@@ -16,8 +16,13 @@
 - JavaScript
 - Webpack
 - API
-- Deploy
+- OOП
 
 ## [Реализация](https://hlopoq.github.io/mesto-project/)
+
+## Напарник
+
+[Александр Рогулин](https://github.com/Fenomenn28)
+( e-mail: alexander_rogulin@bk.ru )
 
 ## [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
