@@ -55,7 +55,7 @@
           id="about"
           minlength="2"
           maxlength="200"
-          pattern="^[a-zA-ZА-Яа-яЁё\s-]+$"
+          pattern="^[a-zA-ZА-Яа-яЁё\s\-]+$"
           data-error-message="Разрешено использовать только латинские, кириллические буквы, знаки дефиса и пробелы."
           required>
           <span class="form__input-error about-error">Вы пропустили это поле</span>
@@ -76,7 +76,7 @@
           id="card-heading"
           minlength="2"
           maxlength="30"
-          pattern="^[a-zA-Zа-яА-ЯёË -]*$"
+          pattern="^[a-zA-ZА-Яа-яЁё\s\-]+$"
           data-error-message="Разрешено использовать только латинские, кириллические буквы, знаки дефиса и пробелы."
           required>
           <span class="form__input-error card-heading-error">Вы пропустили это поле.</span>
@@ -92,7 +92,7 @@
         </form>
         <button class="popup__close-button" type="button" aria-label="Закрыть форму"></button>
       </div>
-    </div> 
+    </div>
     <div class="popup popup__fullscreen">
       <div class="popup__fullscreen-container">
         <img class="popup__fullscreen-image" src="" alt="">
